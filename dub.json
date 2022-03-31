@@ -1,0 +1,25 @@
+{
+	"name": "tracyd",
+	"description": "Trace D programs with Tracy",
+
+	"authors": [ "Muhammed Kadir Yücel"	],
+	"license": "MIT",
+	"copyright": "Copyright  © 2022, BOSAGORA Foundation",
+	
+	"targetType": "library",
+
+	"configurations": [
+		{
+			"name": "library",
+			"preGenerateCommands": [
+				"git submodule update --init"
+			],
+			"preBuildCommands-posix": [
+				"make -C $PACKAGE_DIR -f tracy.mak"
+			],
+			"sourceFiles-posix": [
+				"TracyClient.o"
+			]
+		}
+	]
+}

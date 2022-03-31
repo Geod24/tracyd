@@ -1,0 +1,17 @@
+.dub
+dub.selections.json
+docs.json
+__dummy.html
+docs/
+/tracyd
+tracyd.so
+tracyd.dylib
+tracyd.dll
+tracyd.a
+libtracyd.a
+tracyd.lib
+tracyd-test-*
+*.exe
+*.o
+*.obj
+*.lst
