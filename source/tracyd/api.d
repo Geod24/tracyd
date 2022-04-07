@@ -151,6 +151,36 @@ void ___tracy_emit_gpu_context_name (const ___tracy_gpu_context_name_data);
 
 int ___tracy_connected ();
 
+public import std.format;
+
+mixin template TracyCZoneBase(string ctx, string name, uint color, bool active)
+{
+    mixin(q{
+            static const __tracy_source_location_data%d = ___tracy_source_location_data(name, __FUNCTION__,  __FILE__, cast(uint)__LINE__, color);
+            TracyCZoneCtx %s = ___tracy_emit_zone_begin(&__tracy_source_location_data%d, %u);
+        }.format(__LINE__, ctx,  __LINE__, active ? 1 : 0));
+}
+
+mixin template TracyCZone(string ctx, bool active)
+{
+    mixin TracyCZoneBase!(ctx, "null", 0, active);
+}
+
+mixin template TracyCZoneN(string ctx, string name, bool active)
+{
+    mixin TracyCZoneBase!(ctx, name, 0, active);
+}
+
+mixin template TracyCZoneC(string ctx, uint color, bool active)
+{
+    mixin TracyCZoneBase!(ctx, "null", color, active);
+}
+
+mixin template TracyCZoneNC(string ctx, string name, uint color, bool active)
+{
+    mixin TracyCZoneBase!(ctx, name, color, active);
+}
+
 // #if defined TRACY_HAS_CALLSTACK && defined TRACY_CALLSTACK
 // #  define TracyCZone( ctx, active ) static const struct ___tracy_source_location_data TracyConcat(__tracy_source_location,__LINE__) = { NULL, __FUNCTION__,  __FILE__, (uint)__LINE__, 0 }; TracyCZoneCtx ctx = ___tracy_emit_zone_begin_callstack( &TracyConcat(__tracy_source_location,__LINE__), TRACY_CALLSTACK, active);
 // #  define TracyCZoneN( ctx, name, active ) static const struct ___tracy_source_location_data TracyConcat(__tracy_source_location,__LINE__) = { name, __FUNCTION__,  __FILE__, (uint)__LINE__, 0 }; TracyCZoneCtx ctx = ___tracy_emit_zone_begin_callstack( &TracyConcat(__tracy_source_location,__LINE__), TRACY_CALLSTACK, active);
