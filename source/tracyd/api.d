@@ -157,7 +157,7 @@ mixin template TracyCZoneBase(string ctx, string name, uint color, bool active)
 {
     mixin(q{
             static const __tracy_source_location_data%d = ___tracy_source_location_data(name, __FUNCTION__,  __FILE__, cast(uint)__LINE__, color);
-            TracyCZoneCtx %s = ___tracy_emit_zone_begin(&__tracy_source_location_data%d, %u);
+            TracyCZoneCtx %s = () @trusted { return ___tracy_emit_zone_begin(&__tracy_source_location_data%d, %u); } ();
         }.format(__LINE__, ctx,  __LINE__, active ? 1 : 0));
 }
 
