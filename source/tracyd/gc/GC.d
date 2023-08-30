@@ -37,7 +37,7 @@ version (Posix)
     version = COLLECT_FORK;
 
 import tracyd.gc.bits;
-import tracyd.gc.os;
+import core.internal.gc.os;
 
 import core.gc.config;
 import core.gc.gcinterface;
