@@ -10,9 +10,6 @@
     "configurations": [
 	{
 	    "name": "library",
-	    "preGenerateCommands": [
-		"git submodule update --init"
-	    ],
 	    "preBuildCommands-posix": [
 		"make -C $PACKAGE_DIR -f tracy.mak"
 	    ],
