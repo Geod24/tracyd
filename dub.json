@@ -9,13 +9,13 @@
     "targetType": "library",
     "configurations": [
 	{
-	    "name": "library",
-	    "preBuildCommands-posix": [
-		"make -C $PACKAGE_DIR -f tracy.mak"
-	    ],
-	    "sourceFiles-posix": [
-		"TracyClient.o"
-	    ]
-	}
+	    "name": "library"
+	},
+        {
+            "name": "unittest",
+	    "preBuildCommands-posix": [ "make" ],
+            "sourceFiles-posix": [ "TracyClient.o" ],
+            "libs": [ "stdc++" ]
+        }
     ]
 }
